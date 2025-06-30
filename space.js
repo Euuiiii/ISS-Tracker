@@ -12,6 +12,18 @@ const icon = L.icon({
 
 const marker = L.marker([0, 0], { icon }).addTo(map);
 
+//circle around circle
+let issCircle = L.circle([0, 0], {
+  radius: 2200000,
+  color: 'light blue',
+  fillColor: '#30f',
+  fillOpacity: 0.2
+}).addTo(map);
+
+
+let issPathCoords = [];
+let issPathLine = L.polyline([], { color: 'orange', weight: 2 }).addTo(map);
+
 let followISS = true;
 const followBtn = document.getElementById('followToggle');
 
@@ -27,7 +39,7 @@ async function getISS() {
     const res = await fetch('https://api.wheretheiss.at/v1/satellites/25544');
     if (!res.ok) throw new Error('Network response was not ok');
     const data = await res.json();
-    const { latitude, longitude } = data;
+    const { latitude, longitude, footprint } = data;
 
     console.log('ISS position:', latitude, longitude);
 
@@ -35,6 +47,17 @@ async function getISS() {
     document.getElementById('lon').textContent = longitude.toFixed(2);
 
     marker.setLatLng([latitude, longitude]);
+
+    // Update circle
+    issCircle.setLatLng([latitude, longitude]);
+    if (footprint) {
+      issCircle.setRadius((footprint * 1000) / 2);
+    }
+
+    // Update path
+    issPathCoords.push([latitude, longitude]);
+    if (issPathCoords.length > 1000) issPathCoords.shift(); 
+    issPathLine.setLatLngs(issPathCoords);
 
     if (followISS) {
       map.setView([latitude, longitude], map.getZoom());
