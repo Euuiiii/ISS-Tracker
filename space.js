@@ -12,17 +12,37 @@ const icon = L.icon({
 
 const marker = L.marker([0, 0], { icon }).addTo(map);
 
+let followISS = true;
+const followBtn = document.getElementById('followToggle');
+
+followBtn.textContent = followISS ? 'Unfollow' : 'Follow ISS';
+
+followBtn.addEventListener('click', function () {
+  followISS = !followISS;
+  followBtn.textContent = followISS ? 'Unfollow' : 'Follow ISS';
+});
+
 async function getISS() {
-  const res = await fetch('http://api.open-notify.org/iss-now.json');
-  const data = await res.json();
-  const { latitude, longitude } = data.iss_position;
+  try {
+    const res = await fetch('https://api.wheretheiss.at/v1/satellites/25544');
+    if (!res.ok) throw new Error('Network response was not ok');
+    const data = await res.json();
+    const { latitude, longitude } = data;
 
-  document.getElementById('lat').textContent = latitude;
-  document.getElementById('lon').textContent = longitude;
+    console.log('ISS position:', latitude, longitude);
 
-  marker.setLatLng([latitude, longitude]);
-  map.setView([latitude, longitude], map.getZoom());
+    document.getElementById('lat').textContent = latitude.toFixed(2);
+    document.getElementById('lon').textContent = longitude.toFixed(2);
+
+    marker.setLatLng([latitude, longitude]);
+
+    if (followISS) {
+      map.setView([latitude, longitude], map.getZoom());
+    }
+  } catch (error) {
+    console.error('Failed to fetch ISS position:', error);
+  }
 }
 
 getISS();
-setInterval(getISS, 2000);
+setInterval(getISS, 1000);

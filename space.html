@@ -12,10 +12,16 @@
     <source src="videos/space.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
+  <audio id="space-audio" autoplay loop>
+  <source src="audio/space.mp3" type="audio/mpeg">
+</audio>
   <div id="map"></div>
-  <p><strong>Latitude:</strong> <span id="lat"></span> | <strong>Longitude:</strong> <span id="lon"></span></p>
+  <p><strong>Latitude:</strong> <span id="lat" aria-live="polite"></span> | <strong>Longitude:</strong> <span id="lon" aria-live="polite"></span></p>
+  <button id="followToggle">Follow ISS</button>  
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.smooth_markers@0.1.1/dist/leaflet.smooth_markers.min.js"></script> 
+  <script src="https://unpkg.com/leaflet-polylinedecorator@1.7.0/dist/leaflet.polylineDecorator.min.js"></script>
   <script src="space.js"></script>
 </body>
 </html>
