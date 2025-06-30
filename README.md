@@ -66,8 +66,8 @@ Made for fun and learning! You can also contribute.
 
 ## Demo
 
-![Screenshot of ISS Tracker](ss.png)
-    
+![Screenshot of ISS Tracker](image/ss.png)
+
 ## Contributing
 
 Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
