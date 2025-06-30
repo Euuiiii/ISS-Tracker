@@ -9,15 +9,27 @@
 <body>
   <h1>Where is the ISS?</h1>
   <video autoplay muted loop id="bg-video">
+  <!-- Will replace video with a simple BG image-->
     <source src="videos/space.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
+  <!-- I think of removing it lets see..
   <audio id="space-audio" autoplay loop>
   <source src="audio/space.mp3" type="audio/mpeg">
 </audio>
+-->
   <div id="map"></div>
-  <p><strong>Latitude:</strong> <span id="lat" aria-live="polite"></span> | <strong>Longitude:</strong> <span id="lon" aria-live="polite"></span></p>
-  <button id="followToggle">Follow ISS</button>  
+  <p>
+  <strong>Latitude:</strong> <span id="lat" aria-live="polite"></span> | 
+  <strong>Longitude:</strong> <span id="lon" aria-live="polite"></span>
+</p>
+  <button id="followToggle">Follow ISS</button>
+  <a href="3D_Earth/earth.html">
+    <button>3D View</button>
+  </a>
+  
+
+  <iframe id="globeFrame" src="3D_Earth/earth.html" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; border:none; z-index:1000;"></iframe>
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="https://unpkg.com/leaflet.smooth_markers@0.1.1/dist/leaflet.smooth_markers.min.js"></script> 

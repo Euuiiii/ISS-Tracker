@@ -54,7 +54,7 @@ async function getISS() {
       issCircle.setRadius((footprint * 1000) / 2);
     }
 
-    // Update path
+    // Update path ( i think i will remove this later)
     issPathCoords.push([latitude, longitude]);
     if (issPathCoords.length > 1000) issPathCoords.shift(); 
     issPathLine.setLatLngs(issPathCoords);
@@ -69,3 +69,23 @@ async function getISS() {
 
 getISS();
 setInterval(getISS, 1000);
+
+const view3DButton = document.getElementById('view3D');
+const globeFrame = document.getElementById('globeFrame');
+const mapDiv = document.getElementById('map');
+const infoP = document.querySelector('p');
+
+view3DButton.addEventListener('click', () => {
+  mapDiv.style.display = 'none';
+  followBtn.style.display = 'none';
+  infoP.style.display = 'none';
+  globeFrame.style.display = 'block';
+  view3DButton.style.display = 'none';
+  
+  // This is trash after video and audio is removed
+  document.getElementById('bg-video').pause();
+  document.getElementById('bg-video').style.display = 'none';
+  document.getElementById('space-audio').pause();
+  document.getElementById('space-audio').style.display = 'none';
+  window.location.href = '3D_Earth/earth.html';
+});

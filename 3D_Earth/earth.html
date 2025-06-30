@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ISS 3D Globe Tracker</title>
+  <style>
+    html, body { margin: 0; overflow: hidden; }
+    #globeViz { width: 100vw; height: 100vh; }
+  </style>
+</head>
+<body>
+  <div id="globeViz"></div>
+  <a href="/space.html">
+    <button id="back2D" style="position:fixed;top:20px;left:20px;z-index:10;font-size:18px;">Back to 2D</button>
+  </a>
+  <script src="https://unpkg.com/three"></script>
+  <script src="https://unpkg.com/globe.gl"></script>
+  <script src="earth.js"></script>
+</body>
+</html>
